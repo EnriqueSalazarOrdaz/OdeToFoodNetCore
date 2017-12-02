@@ -19,7 +19,7 @@ namespace OdeToFood
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IConfiguration configuration)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IGreeter greeter)
         {
             if (env.IsDevelopment())
             {
@@ -28,7 +28,7 @@ namespace OdeToFood
 
             app.Run(async (context) =>
             {
-                var greeting = configuration["Greeting"];
+                var greeting = greeter.GetMessage();
                 await context.Response.WriteAsync(greeting);
             });
         }
