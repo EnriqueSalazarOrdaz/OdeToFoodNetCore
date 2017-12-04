@@ -59,7 +59,7 @@ namespace OdeToFood
             app.Run(async (context) =>
             {
                 var greeting = greeter.GetMessage();
-                await context.Response.WriteAsync(greeting);
+                await context.Response.WriteAsync($"{greeting}--------{env.EnvironmentName}");//$ using interpolation feature of C# 6.0 better than String.format().....
             });
         }
     }
