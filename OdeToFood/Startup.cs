@@ -18,10 +18,13 @@ namespace OdeToFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
             IGreeter greeter, 
             ILogger<Startup> logger //specific configuration for Startup class
             )
@@ -56,9 +59,11 @@ namespace OdeToFood
             //    Path = "/wp"
             //});
 
-            app.UseFileServer();//this the same as app.UseDefaultFiles() and app.UseStaticFiles()
-            //app.UseDefaultFiles();
-            //app.UseStaticFiles();
+            //app.UseFileServer();//this the same as app.UseDefaultFiles() and app.UseStaticFiles()
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
+            //the line code above here mean that default page is the one that use the next middleWare(MVC) and that is page/Home/index
+
 
             app.Run(async (context) =>
             {
