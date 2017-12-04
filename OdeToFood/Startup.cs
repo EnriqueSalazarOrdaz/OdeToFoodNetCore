@@ -26,38 +26,39 @@ namespace OdeToFood
             ILogger<Startup> logger //specific configuration for Startup class
             )
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             //using delegate in a middleware
-            app.Use(next =>  //delegate
-            {
-                return async context => //delegate
-                {
-                    logger.LogInformation("Request Incoming"); //write on logger
-                    if (context.Request.Path.StartsWithSegments("/mym")) //path to hit
-                    {
-                        await context.Response.WriteAsync("hit!!"); //reach this 
-                        logger.LogInformation("Request Handled"); 
-                    }
-                    else
-                    {
-                        await next(context); //means pass to the next piece of middleware --> UseWelcomePage or the next that apply
-                        logger.LogInformation("Response outgoing");
-                    }
-                };
+            //app.Use(next =>  //delegate
+            //{
+            //    return async context => //delegate
+            //    {
+            //        logger.LogInformation("Request Incoming"); //write on logger
+            //        if (context.Request.Path.StartsWithSegments("/mym")) //path to hit
+            //        {
+            //            await context.Response.WriteAsync("hit!!"); //reach this 
+            //            logger.LogInformation("Request Handled"); 
+            //        }
+            //        else
+            //        {
+            //            await next(context); //means pass to the next piece of middleware --> UseWelcomePage or the next that apply
+            //            logger.LogInformation("Response outgoing");
+            //        }
+            //    };
 
-            });
+            //});
 
-            app.UseWelcomePage(new WelcomePageOptions
-            {
-                Path = "/wp"
-            });
+            //app.UseWelcomePage(new WelcomePageOptions
+            //{
+            //    Path = "/wp"
+            //});
 
             app.Run(async (context) =>
             {
+                throw new Exception("error!");
                 var greeting = greeter.GetMessage();
                 await context.Response.WriteAsync(greeting);
             });
