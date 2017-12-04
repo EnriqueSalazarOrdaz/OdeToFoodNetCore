@@ -8,9 +8,9 @@ namespace OdeToFood
     }
     public class Greeter : IGreeter
     {
-        private IConfiguration _configuration;
+        private IConfiguration _configuration;//this is a private field
 
-        public Greeter(IConfiguration configuration)
+        public Greeter(IConfiguration configuration)//we do that because when we need to split and it will make easy for testingProject
         {
             _configuration = configuration;
         }
