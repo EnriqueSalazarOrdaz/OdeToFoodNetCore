@@ -58,7 +58,6 @@ namespace OdeToFood
 
             app.Run(async (context) =>
             {
-                throw new Exception("error!");
                 var greeting = greeter.GetMessage();
                 await context.Response.WriteAsync(greeting);
             });
