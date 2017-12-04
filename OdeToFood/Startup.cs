@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing;
 
 namespace OdeToFood
 {
@@ -61,15 +62,24 @@ namespace OdeToFood
 
             //app.UseFileServer();//this the same as app.UseDefaultFiles() and app.UseStaticFiles()
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
             //the line code above here mean that default page is the one that use the next middleWare(MVC) and that is page/Home/index
+            app.UseMvc(ConfigureRoutes);
+            
 
 
             app.Run(async (context) =>
             {
                 var greeting = greeter.GetMessage();
-                await context.Response.WriteAsync($"{greeting}--------{env.EnvironmentName}");//$ using interpolation feature of C# 6.0 better than String.format().....
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync($"Not Found");//$ using interpolation feature of C# 6.0 better than String.format().....
             });
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            //  /Home/Index/4   or /admin/Home/Index , etc
+            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
+            //routeBuilder.MapRoute("Default", "admin/{controller}/{action}");
         }
     }
 }
