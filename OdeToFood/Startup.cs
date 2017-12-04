@@ -55,6 +55,7 @@ namespace OdeToFood
             //{
             //    Path = "/wp"
             //});
+            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
