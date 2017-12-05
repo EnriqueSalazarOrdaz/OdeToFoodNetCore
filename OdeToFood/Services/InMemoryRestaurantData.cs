@@ -18,6 +18,12 @@ namespace OdeToFood.Services
                 new Restaurant { Id = 3, Name = "Chilis" }
             };
         }
+
+        public Restaurant Get(int id)
+        {
+            return _restaurant.FirstOrDefault(item=>item.Id==id);
+        }
+
         public IEnumerable<Restaurant> GetAll()
         {
             return _restaurant.OrderBy(r => r.Name);
