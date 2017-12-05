@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OdeToFood.Models;
 
 namespace OdeToFood.Controllers
 {
@@ -6,7 +7,8 @@ namespace OdeToFood.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Hello from the HomeController!");
+            var model = new Restaurant { Id=1,Name="kike's restaurant" };
+            return new ObjectResult(model);//return json(default), xml, csv, pdf, etc, according to the header http request.
         }
     }
 }
