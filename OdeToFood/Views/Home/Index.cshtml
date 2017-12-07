@@ -9,16 +9,23 @@
     <title>Index asd</title>
 </head>
 <body>
+    <h2>@Model.CurrentMessage</h2>
     <table>
         @foreach (var item in Model.Restaurants)
         {
             <tr>
                 <td>restaurant's id:@item.Id</td>
                 <td>@item.Name</td>
+                <td>
+                    <a href="/Home/Details/@item.Id">Details</a>
+                    @Html.ActionLink("Go", "Details", new { id=item.Id})
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Home">More</a>@*Better use this more readable*@
+                    
+                </td>
             </tr>
         }
     </table>
-    <h2>@Model.CurrentMessage</h2>
+    
     
 </body>
 </html>

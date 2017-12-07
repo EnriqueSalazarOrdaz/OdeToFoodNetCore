@@ -16,8 +16,6 @@ namespace OdeToFood.Controllers
             _restaurantData = restaurantData;
             _greeter = greeter;
         }
-        [HttpGet]
-        [ActionName("Index")]    
         public IActionResult Index()
         {
             //var model = new Restaurant { Id=1,Name="kike's restaurant" }; //using simple class
@@ -35,7 +33,7 @@ namespace OdeToFood.Controllers
             {
                 //return NotFound();
                 //return RedirectToAction("Index", "Home");
-                return RedirectToAction(nameof(Index),"Home");//better because if you rename Index Action using decoration is more mantainable.
+                return RedirectToAction(nameof(HomeController.Index),"Home");//better because if you rename Index Action using decoration is more mantainable.
             }
             return View(model);
         }
