@@ -1,0 +1,19 @@
+﻿@using OdeToFood.Models @*other way to use namespace on view, instead of full path at model*@
+@model Restaurant
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <form method="post">
+        <input asp-for="Name" />
+        <select asp-for="Cusine" asp-items="@Html.GetEnumSelectList<CusineType>()">
+        </select>
+        <input type="submit" name="save" value="save" />
+    </form>
+</body>
+</html>
