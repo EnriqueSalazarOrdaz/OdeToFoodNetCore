@@ -45,12 +45,19 @@ namespace OdeToFood.Controllers
         [HttpPost]
         public IActionResult Create(RestaurantEditModel restaurant) //better cuz, malicious user can send more information
         {
-            var newRestaurant = new Restaurant();
-            newRestaurant.Name = restaurant.Name;
-            newRestaurant.Cusine = restaurant.Cusine;
-            newRestaurant=_restaurantData.Add(newRestaurant);
-            //return View("Details",newRestaurant);//better response redirect
-            return RedirectToAction(nameof(Details), new { id = newRestaurant.Id });
+            if (ModelState.IsValid)
+            {
+                var newRestaurant = new Restaurant();
+                newRestaurant.Name = restaurant.Name;
+                newRestaurant.Cusine = restaurant.Cusine;
+                newRestaurant = _restaurantData.Add(newRestaurant);
+                //return View("Details",newRestaurant);//better response redirect
+                return RedirectToAction(nameof(Details), new { id = newRestaurant.Id });
+            }
+            else
+            {
+                return View();//return the same view with the errors
+            }
         }
     }
 }
